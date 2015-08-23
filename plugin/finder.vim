@@ -51,6 +51,10 @@ function! Locate(...)
         let exe_name = "es.exe"
     endif
     let l:cmd = exe_name." -r ".pattern
+    if has("mac")
+        let exe_name = "mdfind"
+        let l:cmd = exe_name." -name ".pattern
+    endif
     echo l:cmd
     let l:list=system(l:cmd)
     let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
